@@ -1,0 +1,111 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Server API"
+  description: "API for managing servers"
+basePath: /api
+tags:
+  - name: servers
+    description: Server operations
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /servers:
+    get:
+      tags:
+        - servers
+      summary: "Get all servers"
+      description: "Returns all server objects"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Server"
+    post:
+      tags:
+        - servers
+      summary: "Create a server"
+      description: "Creates a new server object"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: server
+          description: "Server object to be created"
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Server"
+  /servers/{id}:
+    get:
+      tags:
+        - servers
+      summary: "Get a server by ID"
+      description: "Returns a single server object by ID"
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: "ID of server to return"
+          required: true
+          type: string
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Server"
+        "404":
+          description: "server not found"
+    put:
+      tags:
+        - servers
+      summary: "Update a server"
+      description: "Updates an existing server object"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: "ID of server to update"
+          required: true
+          type: string
+        - in: body
+          name: server
+          description: "Server object to be updated"
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Server"
+        "404":
+          description: "server not found"
+    delete:
+      tags:
+        - servers
+      summary: "Delete a server"
+      description: "Deletes an existing server object"
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: "ID of server to delete"
+          required
